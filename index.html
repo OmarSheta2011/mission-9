@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="root">
+      <div class="container">
+        <div class="filter">
+          <input type="text" class="search-text-input" />
+          <select name="category" id="category-input">
+            <option value="Stationery">Stationery</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+          <select name="sort" id="sort">
+            <option value="Default">Default</option>
+            <option value="LtH">Low to high</option>
+            <option value="HtL">High to low</option>
+          </select>
+        </div>
+        <div class="products-container">
+          <div class="product">
+            <div class="image"></div>
+            <h3 class="product-name">notebook</h3>
+            <p class="product-category">Stationery</p>
+            <p class="product-price"> 40 EGP</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
