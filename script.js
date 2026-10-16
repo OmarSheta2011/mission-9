@@ -4,23 +4,36 @@ const filter = document.querySelector(".filter");
 const searchTextInput = document.querySelector(".search-text-input");
 const categoryInput = document.querySelector("#category-input");
 const sortInput = document.querySelector("#sort");
+const productsContainer = document.querySelector(".products-container");
 // ----------------------------------
-let searchText = "";
+let searchText = searchTextInput.value;
 let category = categoryInput.value;
 let sort = sortInput.value;
 
 function filterByName(text) {
-  let arr = products.filter((product) =>
-    product.name.toLowerCase().includes(text),
-  );
+  let arr = [...products];
+  if (text !== "") {
+    arr = products.filter((product) =>
+      product.name.toLowerCase().includes(text.toLowerCase()),
+    );
+  }
   console.log(arr);
-  filterByCategory(arr);
+  if (arr.length) {
+    filterByCategory(arr);
+  } else {
+    productsContainer.innerHTML = "No Products Found.";
+  }
 }
 
 function filterByCategory(arr) {
-  let arr2 = arr.filter((product) => product.category === category);
-  console.log(arr2);
-  filterByPrice(arr2);
+  let arr2 = [...arr];
+  if (category !== "All")
+    arr2 = arr.filter((product) => product.category === category);
+  if (arr2.length) {
+    filterByPrice(arr2);
+  } else {
+    productsContainer.innerHTML = "No Products Found.";
+  }
 }
 
 function filterByPrice(arr2) {
@@ -33,32 +46,52 @@ function filterByPrice(arr2) {
       prices.forEach((price) => {
         arr2.forEach((product) => {
           if (price === product.price) {
-            arr3.unshift(product);
+            arr3.push(product);
           }
         });
       });
-
-      console.log(prices.toSorted());
-      console.log(arr3);
       break;
     case "HtL":
-      arr3 = prices.toSorted().reverse();
+      prices = prices.toSorted().reverse();
+      prices.forEach((price) => {
+        arr2.forEach((product) => {
+          if (price === product.price) {
+            arr3.push(product);
+          }
+        });
+      });
       break;
     case "Default":
       arr3 = [...arr2];
-      console.log("default" + arr3);
       break;
   }
+
+  generateProductsHTML(arr3);
+}
+
+function generateProductsHTML(arr3) {
+  let productsHTML = "";
+  arr3.forEach((product) => {
+    productsHTML += `
+      <div class="product">
+        <div class="image"></div>
+        <h3 class="product-name">${product.name}</h3>
+        <p class="product-category">${product.category}</p>
+        <p class="product-price"> ${product.price} EGP</p>
+      </div>`;
+  });
+  productsContainer.innerHTML = productsHTML;
 }
 
 categoryInput.addEventListener("change", (e) => {
   category = e.target.value;
+  searchText = searchTextInput.value;
   filterByName(searchText);
 });
 
 sortInput.addEventListener("change", (e) => {
   sort = e.target.value;
-
+  searchText = searchTextInput.value;
   filterByName(searchText);
 });
 
