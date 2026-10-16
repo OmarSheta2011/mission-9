@@ -5,6 +5,7 @@ const searchTextInput = document.querySelector(".search-text-input");
 const categoryInput = document.querySelector("#category-input");
 const sortInput = document.querySelector("#sort");
 const productsContainer = document.querySelector(".products-container");
+const numberOfProductsElem = document.querySelector(".number-of-products");
 // ----------------------------------
 let category;
 let sort;
@@ -39,13 +40,13 @@ function filterByCategory(arr) {
 
 function filterByPrice(arr2) {
   let prices = arr2.map((product) => product.price);
-  console.log(prices)
+  console.log(prices);
   let arr3 = [];
 
   switch (sort) {
     case "LtH":
       prices = prices.toSorted();
-      console.log(prices)
+      console.log(prices);
       prices.forEach((price) => {
         arr2.forEach((product) => {
           if (price === product.price) {
@@ -56,7 +57,7 @@ function filterByPrice(arr2) {
       break;
     case "HtL":
       prices = prices.toSorted().reverse();
-      console.log(prices)
+      console.log(prices);
       prices.forEach((price) => {
         arr2.forEach((product) => {
           if (price === product.price) {
@@ -84,6 +85,7 @@ function generateProductsHTML(arr3) {
         <p class="product-price"> ${product.price} EGP</p>
       </div>`;
   });
+  numberOfProductsElem.innerHTML = `Showing ${arr3.length} products`;
   productsContainer.innerHTML = productsHTML;
 }
 
