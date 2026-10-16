@@ -6,11 +6,12 @@ const categoryInput = document.querySelector("#category-input");
 const sortInput = document.querySelector("#sort");
 const productsContainer = document.querySelector(".products-container");
 // ----------------------------------
-let searchText = searchTextInput.value;
-let category = categoryInput.value;
-let sort = sortInput.value;
+let category;
+let sort;
 
 function filterByName(text) {
+  category = categoryInput.value;
+  sort = sortInput.value;
   let arr = [...products];
   if (text !== "") {
     arr = products.filter((product) =>
@@ -38,11 +39,13 @@ function filterByCategory(arr) {
 
 function filterByPrice(arr2) {
   let prices = arr2.map((product) => product.price);
+  console.log(prices)
   let arr3 = [];
 
   switch (sort) {
     case "LtH":
       prices = prices.toSorted();
+      console.log(prices)
       prices.forEach((price) => {
         arr2.forEach((product) => {
           if (price === product.price) {
@@ -53,6 +56,7 @@ function filterByPrice(arr2) {
       break;
     case "HtL":
       prices = prices.toSorted().reverse();
+      console.log(prices)
       prices.forEach((price) => {
         arr2.forEach((product) => {
           if (price === product.price) {
@@ -85,18 +89,14 @@ function generateProductsHTML(arr3) {
 
 categoryInput.addEventListener("change", (e) => {
   category = e.target.value;
-  searchText = searchTextInput.value;
-  filterByName(searchText);
+  filterByName(searchTextInput.value);
 });
 
 sortInput.addEventListener("change", (e) => {
   sort = e.target.value;
-  searchText = searchTextInput.value;
-  filterByName(searchText);
+  filterByName(searchTextInput.value);
 });
 
-searchTextInput.addEventListener("keydown", (e) => {
-  if (e.key === "backSpace") return;
-  searchText = searchTextInput.value;
-  filterByName(searchText);
+searchTextInput.addEventListener("keyup", (e) => {
+  filterByName(searchTextInput.value);
 });
