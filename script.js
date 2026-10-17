@@ -32,45 +32,33 @@ function filterByCategory(arr) {
   if (category !== "All")
     arr2 = arr.filter((product) => product.category === category);
   if (arr2.length) {
-    filterByPrice(arr2);
+    sortByPrice(arr2);
   } else {
     productsContainer.innerHTML = "No Products Found.";
   }
 }
 
-function filterByPrice(arr2) {
-  let prices = arr2.map((product) => product.price);
-  console.log(prices);
+function sortByPrice(arr2) {
   let arr3 = [];
-
   switch (sort) {
     case "LtH":
-      prices = prices.toSorted();
-      console.log(prices);
-      prices.forEach((price) => {
-        arr2.forEach((product) => {
-          if (price === product.price) {
-            arr3.push(product);
-          }
-        });
-      });
+      arr3 = [
+        ...arr2.toSorted(
+          (product, nextProduct) => product.price - nextProduct.price,
+        ),
+      ];
       break;
     case "HtL":
-      prices = prices.toSorted().reverse();
-      console.log(prices);
-      prices.forEach((price) => {
-        arr2.forEach((product) => {
-          if (price === product.price) {
-            arr3.push(product);
-          }
-        });
-      });
+      arr3 = [
+        ...arr2.toSorted(
+          (product, nextProduct) => nextProduct.price - product.price,
+        ),
+      ];
       break;
     case "Default":
       arr3 = [...arr2];
       break;
   }
-
   generateProductsHTML(arr3);
 }
 
