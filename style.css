@@ -15,18 +15,18 @@ body {
 }
 
 .root {
-  width: 100vw;
-  min-height: 100vh;
+  max-width: 100dvw;
+  width: 100dvw;
+  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   background-color: aliceblue;
   justify-content: center;
-  align-items: center;
   padding: 2rem;
 }
 
 .container {
-  height: 100%;
-  width: 100vw;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -35,6 +35,7 @@ body {
 }
 
 .filter {
+  width: 100%;
   display: flex;
   gap: 1rem;
 }
