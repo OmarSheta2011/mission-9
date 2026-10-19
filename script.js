@@ -20,7 +20,6 @@ function filterByName(text) {
       product.name.toLowerCase().includes(text.toLowerCase()),
     );
   }
-  console.log(arr);
   if (arr.length) {
     filterByCategory(arr);
   } else {

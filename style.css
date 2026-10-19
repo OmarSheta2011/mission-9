@@ -41,7 +41,7 @@ body {
   flex-wrap: wrap;
 }
 
-.reset-btn{
+.reset-btn {
   background-color: red;
   flex: 0.5;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .filter > * {
-  min-width: none;
+  min-width: 0;
   border-radius: 8px;
   border: 1px solid black;
   padding: 0.8rem 1.2rem;
