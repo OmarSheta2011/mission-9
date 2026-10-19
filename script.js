@@ -6,6 +6,7 @@ const categoryInput = document.querySelector("#category-input");
 const sortInput = document.querySelector("#sort");
 const productsContainer = document.querySelector(".products-container");
 const numberOfProductsElem = document.querySelector(".number-of-products");
+const resetBtn = document.querySelector(".reset-btn");
 // ----------------------------------
 let category;
 let sort;
@@ -24,6 +25,7 @@ function filterByName(text) {
     filterByCategory(arr);
   } else {
     productsContainer.innerHTML = "No Products Found.";
+    numberOfProductsElem.innerHTML = `Showing 0 products`;
   }
 }
 
@@ -35,6 +37,7 @@ function filterByCategory(arr) {
     sortByPrice(arr2);
   } else {
     productsContainer.innerHTML = "No Products Found.";
+    numberOfProductsElem.innerHTML = `Showing 0 products`;
   }
 }
 
@@ -90,3 +93,12 @@ sortInput.addEventListener("change", (e) => {
 searchTextInput.addEventListener("keyup", (e) => {
   filterByName(searchTextInput.value);
 });
+
+resetBtn.addEventListener("click", () => {
+  categoryInput.value = "All";
+  sortInput.value = "Default";
+  searchTextInput.value = "";
+  filterByName(searchTextInput.value);
+});
+
+filterByName(searchTextInput.value);
